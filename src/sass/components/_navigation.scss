@@ -1,0 +1,28 @@
+.navigation {
+  position: absolute;
+  background-color: white;
+  left: 0;
+  list-style-type: none;
+  padding: 0rem 5rem 5rem 5rem;
+  top: 0;
+  width: 70%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10rem;
+  transform: translateX(-100%);
+  transition: all 0.5s;
+  &__active {
+    transform: translateX(0);
+  }
+  z-index: 900;
+
+  &__item {
+    a {
+      color: $color-black;
+      text-decoration: none;
+    }
+  }
+}

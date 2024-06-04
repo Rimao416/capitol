@@ -1,0 +1,32 @@
+.button {
+  border: none;
+  outline: none;
+  background-color: none;
+  cursor: pointer;
+  color: black;
+  font-size: $default-font-size;
+  padding: 8px;
+  // padding: 10px 15px;
+  border-radius: 5px;
+  transition: all 0.2s;
+  border: 1px solid black;
+  &__inline {
+    // padding: 1rem;
+    background-color: black;
+    color: white;
+    // font-weight: $main-font-weight;
+    &:hover {
+      background-color: transparent;
+      color: black;
+      border: 1px solid black;
+    }
+  }
+  &__outline {
+    background-color: white;
+    &:hover {
+      background-color: black;
+      color: white;
+      // font-weight: $main-font-weight;
+    }
+  }
+}
