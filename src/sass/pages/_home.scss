@@ -121,8 +121,8 @@
 .about {
   margin-top: 40px;
 
+  width: 100%;
   * {
-    width: 60%;
     @include respond(tab-port) {
       width: 100%;
     }
@@ -145,7 +145,8 @@
     display: flex;
     justify-content: space-between;
     @include respond(tab-port) {
-    //   flex-direction: column;
+      flex-direction: column;
+      gap: 10px;
       flex-wrap: wrap;
     }
     align-items: center;
@@ -180,12 +181,22 @@
 .counter {
   line-height: 1.2;
   // text-align: left;
+  padding: 10px;
+  flex-basis: 15%;
   &__count {
     font-weight: 600;
     font-size: 30px;
   }
+  box-shadow: -2px 2px 23px -14px rgba(0,0,0,0.75);
+  -webkit-box-shadow: -2px 2px 23px -14px rgba(0,0,0,0.75);
+  -moz-box-shadow: -2px 2px 23px -14px rgba(0,0,0,0.75);
+  &:hover{
+    transition: .2s ease;
+    cursor: pointer;
+  }
+  // padding: 20px;
   @include respond(tab-port) {
-    width: 50%;
+    width: 100%;
 
 
     // Le dernier élément prend 100% de la largeur s'il est impair
