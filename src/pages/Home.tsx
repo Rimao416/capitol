@@ -5,6 +5,7 @@ import Capitol from "../assets/capitol.png";
 import Team from "../assets/team.jpg";
 import { IoIosArrowForward } from "react-icons/io";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { motion } from "framer-motion";
 import { useState } from "react";
 function Home() {
   interface titleProps {
