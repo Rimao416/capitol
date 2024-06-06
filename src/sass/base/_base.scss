@@ -10,6 +10,9 @@ html {
     // This defines what 1rem is
     font-size: 62.5%; // 1rem = 10px; 10px/16px = 62.5%
     padding:10px 5rem 0 5rem;
+    @include respond(tab-port) {
+        padding:10 2.5rem 0 2.5rem;
+    }
     background-color: $color-gray-2;
     color: $color-black;
     
