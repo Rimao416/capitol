@@ -86,24 +86,6 @@
       display: none;
     }
   }
-
-  //   &__wrapper.active {
-  //     display: flex;
-  //     flex-direction: column;
-  //     align-items: flex-start;
-  //     width: 100%;
-  //     background-color: white;
-  //     position: absolute;
-  //     // top: 60px; // Adjust according to your header height
-  //     left: 0;
-  //     z-index: 10;
-  //     // padding: 1rem;
-
-  //     a {
-  //       padding: 0.5rem 0;
-  //       width: 100%;
-  //     }
-  //   }
 }
 .overlay {
   position: fixed;
@@ -120,9 +102,9 @@
 }
 .about {
   margin-top: 40px;
-
-  width: 100%;
+  text-align: center;
   * {
+    width: 60%;
     @include respond(tab-port) {
       width: 100%;
     }
@@ -145,8 +127,9 @@
     display: flex;
     justify-content: space-between;
     @include respond(tab-port) {
-      flex-direction: column;
+      flex-direction: row;
       gap: 10px;
+
       flex-wrap: wrap;
     }
     align-items: center;
@@ -172,36 +155,164 @@
   }
   &__description {
     // font-size: 45px;
-    font-size: 4.5rem;
     font-weight: 600;
     line-height: 1;
     margin-top: $min-margin;
   }
 }
+.large {
+  font-size: 4.5rem;
+}
+.medium {
+  font-size: 3.5rem;
+}
 .counter {
   line-height: 1.2;
+  cursor: pointer;
+
   // text-align: left;
   padding: 10px;
-  flex-basis: 15%;
+  flex-basis: 18%;
   &__count {
+    width: 100%;
     font-weight: 600;
     font-size: 30px;
   }
-  box-shadow: -2px 2px 23px -14px rgba(0,0,0,0.75);
-  -webkit-box-shadow: -2px 2px 23px -14px rgba(0,0,0,0.75);
-  -moz-box-shadow: -2px 2px 23px -14px rgba(0,0,0,0.75);
-  &:hover{
-    transition: .2s ease;
-    cursor: pointer;
-  }
-  // padding: 20px;
-  @include respond(tab-port) {
+  &__description {
     width: 100%;
+  }
 
+  box-shadow: -2px 2px 23px -14px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: -2px 2px 23px -14px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: -2px 2px 23px -14px rgba(0, 0, 0, 0.75);
+  @include respond(tab-port) {
+    // width: 50%;
+    flex-basis: 45%;
 
     // Le dernier élément prend 100% de la largeur s'il est impair
     &:nth-child(odd):last-child {
+      flex: 1;
+    }
+  }
+}
+.features {
+  margin-top: $large-margin;
+  &__wrapper {
+    display: flex;
+    justify-content: space-between;
+    margin-top: $large-margin;
+    @include respond(tab-port) {
+      flex-direction: column;
+      gap: 10px;
+    }
+    // *{
+    //   flex-basis: 30%;
+
+    // }
+  }
+}
+
+.landing {
+  display: flex;
+  justify-content: space-between;
+  // align-items: center;
+  margin-top: $large-margin;
+  gap: 20px;
+  @include respond(tab-port) {
+    flex-direction: column;
+    gap: 10px;
+    // margin-top: 10px;
+    img {
+      display: none;
+    }
+  }
+  height: 65vh;
+  @include respond(phone) {
+    height: 100%;
+  }
+  overflow: hidden;
+  &__wrapper {
+    position: relative;
+    flex-basis: 50%;
+    @include respond(tab-port) {
+      &:nth-child(1) {
+        display: none;
+      }
+    }
+    img {
+      position: relative;
+      width: 100%;
+      object-fit: cover;
+      // height: 50rem;
+      object-position: center;
+      overflow: hidden;
+      border-radius: 30px;
+    }
+    &:nth-child(2) {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+  }
+  &__title {
+    font-size: 3.5rem;
+    font-weight: 600;
+    line-height: 1;
+  }
+  &__description {
+    margin-top: $normal-margin;
+    line-height: 1.5;
+    font-weight: 400;
+    // font-size: 1.5rem;
+    color: #717171;
+  }
+  &__button {
+    margin-top: $normal-margin;
+    display: flex;
+    gap: 10px;
+    @include respond(tab-port) {
       width: 100%;
     }
+  }
+}
+.elevate {
+  margin-top: $large-margin;
+  // @include respond(tab-port) {
+  //   margin-top: 10px;
+  // }
+  &__zone {
+    display: flex;
+    justify-content: space-between;
+    margin-top: $large-margin;
+    @include respond(tab-port) {
+      // flex-direction: column;
+      flex-direction: column-reverse;
+      gap: 10px;
+    }
+  }
+  &__wrapper {
+    flex-basis: 50%;
+    @include respond(tab-port) {
+      &:nth-child(1) {
+        // margin-top: 10px;
+        flex-direction: row;
+      }
+    }
+  }
+  img {
+    width: 100%;
+    object-fit: cover;
+    // height: 50rem;
+    object-position: center;
+    overflow: hidden;
+    border-radius: 30px;
+  }
+  &__title {
+    font-size: 2.5rem;
+    line-height: 1;
+    font-weight: 600;
+  }
+  &__mana{
+    margin-top: $normal-margin;
   }
 }

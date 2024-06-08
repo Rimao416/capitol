@@ -2,10 +2,16 @@
 import { IoSearchSharp } from "react-icons/io5";
 import Button from "../components/Button";
 import Capitol from "../assets/capitol.png";
+import House from "../assets/house_4.jpg";
+import Commnunity from "../assets/community.jpg";
 import Team from "../assets/team.jpg";
 import { IoIosArrowForward } from "react-icons/io";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { useState } from "react";
+import { featureData } from "../constant/FeatureData";
+import Features from "../components/Features";
+import { elevateData } from "../constant/ElevateData";
+import Elevate from "../components/Elevate";
 function Home() {
   interface titleProps {
     title: string;
@@ -36,9 +42,9 @@ function Home() {
   ];
   const Title: React.FC<titleProps> = ({ title, description, size }) => {
     return (
-      <div className={`title tittle__${size}`}>
+      <div className={`title`}>
         <h1 className="title__main">{title}</h1>
-        <p className="title__description">{description}</p>
+        <p className={`title__description ${size}`}>{description}</p>
       </div>
     );
   };
@@ -101,6 +107,71 @@ function Home() {
               description={item.description}
             />
           ))}
+        </div>
+      </section>
+      <section className="features">
+        <Title
+          title="Comment Pouvons-nous vous aider?"
+          description="flexibilité de votre style de vie"
+          size="medium"
+        />
+        <div className="features__wrapper">
+          {featureData.map((item, index) => (
+            <Features
+              key={index}
+              icon={item.icon}
+              title={item.title}
+              description={item.description}
+              color={item.color}
+            />
+          ))}
+        </div>
+      </section>
+      <section className="landing">
+        <div className="landing__wrapper">
+          <img src={House} alt="" />
+        </div>
+        <div className="landing__wrapper">
+          <h1 className="landing__title">
+            Atterrissage pour le logement d'entreprise
+          </h1>
+          <p className="landing__description">
+            Découvrez notre service, conçu pour simplifier la transition de vos
+            employés lors de leurs déplacements professionnels. Nous offrons des
+            solutions d'hébergement flexibles et entièrement équipées, idéales
+            pour les séjours de courte et de longue durée.
+          </p>
+          <div className="landing__button">
+            <Button title="En savoir plus" type="inline" />
+            <Button title="Contactez-nous" type="outline" />
+          </div>
+        </div>
+      </section>
+      <section className="elevate">
+        <Title
+          title="Elevé"
+          description="Renforcer L'engagement Communautaire"
+          size="medium"
+        />
+        <div className="elevate__zone">
+          <div className="elevate__wrapper">
+            <h1 className="elevate__title">
+              Une expérience de vie meublée et non un agrégateur
+            </h1>
+            <div className="elevate__mana">
+              {elevateData.map((item, index) => (
+                <Elevate
+                  key={index}
+                  title={item.title}
+                  description={item.description}
+                  number={item.number}
+                />
+              ))}
+            </div>
+          </div>
+          <div className="elevate__wrapper">
+            <img src={Commnunity} alt="" />
+          </div>
         </div>
       </section>
       <div

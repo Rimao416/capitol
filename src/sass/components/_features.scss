@@ -1,0 +1,36 @@
+.features {
+
+  &__element {
+    cursor: pointer;
+    flex-basis: 30%;
+    // font-size: 14px !important;
+    padding: 35px;
+    background-color: white;
+    box-shadow: -2px 2px 23px -14px rgba(0,0,0,0.75);
+    -webkit-box-shadow: -2px 2px 23px -14px rgba(0,0,0,0.75);
+    -moz-box-shadow: -2px 2px 23px -14px rgba(0,0,0,0.75);
+  }
+
+  &__icon {
+    svg {
+      font-size: 40px;
+    }
+    &--green {
+      color: rgb(22, 103, 27);
+    }
+    &--orange {
+      color: rgb(255, 190, 119);
+    }
+    &--blue {
+      color: rgb(86, 85, 100);
+    }
+  }
+  &__title {
+    margin-top: $normal-margin;
+    font-size: 20px;
+  }
+  &__link{
+    margin-top: $normal-margin;
+    // background-color: red;
+  }
+}
