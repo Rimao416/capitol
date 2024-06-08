@@ -12,6 +12,8 @@ import { featureData } from "../constant/FeatureData";
 import Features from "../components/Features";
 import { elevateData } from "../constant/ElevateData";
 import Elevate from "../components/Elevate";
+import { testimonialsData } from "../constant/TestimonialsData";
+import Testimonials from "../components/Testimonials";
 function Home() {
   interface titleProps {
     title: string;
@@ -173,6 +175,24 @@ function Home() {
             <img src={Commnunity} alt="" />
           </div>
         </div>
+      </section>
+      <section className="team">
+        <Title
+          title="Notre Equipe"
+          description="Rencontrez notre ecurie"
+          size="medium"
+        />
+        <div className="team__member">
+          {testimonialsData.map((item, index) => (
+            <Testimonials
+              key={index}
+              name={item.name}
+              job={item.job}
+              image={item.image}
+            />
+          ))}
+        </div>
+
       </section>
       <div
         className={`overlay ${active ? "active" : ""}`}
