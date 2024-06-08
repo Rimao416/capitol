@@ -217,7 +217,7 @@
   justify-content: space-between;
   // align-items: center;
   margin-top: $large-margin;
-  gap: 20px;
+  gap: 50px;
   @include respond(tab-port) {
     flex-direction: column;
     gap: 10px;
@@ -312,21 +312,19 @@
     line-height: 1;
     font-weight: 600;
   }
-  &__mana{
+  &__mana {
     margin-top: $normal-margin;
   }
 }
-.team{
+.team {
   margin-top: $large-margin;
-  &__member{
+  &__member {
     display: flex;
     text-align: center;
     justify-content: space-between;
     gap: 20px;
     flex-wrap: wrap;
 
-    
-    
     // margin-top: $normal-margin;
     // padding: 20px;
     @include respond(tab-port) {
@@ -334,9 +332,9 @@
       gap: 10px;
     }
   }
-  &__element{
+  &__element {
     cursor: pointer;
-    margin-top: $normal-margin;    
+    margin-top: $normal-margin;
     width: 200px;
     height: 200px;
     flex-basis: 20%;
@@ -350,24 +348,20 @@
       width: 100%;
       padding: 10px;
       flex: 1;
-
-
     }
-&:hover{
-  transform: translate(0, -10px);
-}
-    &--wrapper{
+    &:hover {
+      transform: translate(0, -10px);
+    }
+    &--wrapper {
       width: 100%;
       height: 100%;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      
     }
- 
   }
-  &__image{
+  &__image {
     width: 70px;
     height: 70px;
     object-fit: cover;
@@ -375,7 +369,100 @@
     overflow: hidden;
     border-radius: 80px;
   }
-  &__job{
+  &__job {
     color: #717171;
+  }
+}
+.newsletter {
+  margin-top: $large-margin;
+  padding: 20px;
+
+  background: rgb(252, 217, 185);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  @include respond(tab-port) {
+    flex-direction: column;
+
+  }
+  gap: 20px;
+  background: linear-gradient(
+    83deg,
+    rgba(252, 217, 185, 1) 0%,
+    rgba(196, 224, 235, 1) 100%
+  );
+  &__title {
+    font-size: 3.5rem;
+    font-weight: 600;
+    line-height: 1;
+  }
+  &__description {
+    margin-top: $normal-margin;
+    line-height: 1.5;
+    font-weight: 400;
+    // font-size: 1.5rem;
+    color: #717171;
+  }
+
+  &__wrapper {
+    flex-basis: 40%;
+    @include respond(tab-port) {
+      width: 100%;
+    }
+
+    &:nth-child(2) {
+      display: flex;
+      justify-content: space-between;
+      input{
+        flex:1;
+        background: transparent;
+        outline: none;
+        border: none;
+      }
+      padding: 10px;
+      background-color: white;
+      border-radius: 40px;
+    }
+  }
+}
+
+.footer{
+  background-color: white;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  padding:20px 5rem 0 5rem;
+
+  // padding: 80px  70px;
+  margin-top: $large-margin;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, auto));
+  gap: 3.5rem;
+  @include respond(tab-port) {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, auto));
+      gap: 2rem;
+  }
+  &__content{
+    // margin-bottom: 2.5rem;
+    h4{
+      margin-bottom: 1.5rem;
+      font-size: 14px;
+    }
+    li{
+      margin-bottom: 1rem;
+      cursor: pointer;
+      list-style-type: none;
+      font-size: 14px;
+      &:hover{
+        color: black;
+      }
+      
+      
+    }
+    a{
+      text-decoration: none;
+      color: black;
+    }
   }
 }

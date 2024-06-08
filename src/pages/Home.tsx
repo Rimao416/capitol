@@ -7,14 +7,36 @@ import Commnunity from "../assets/community.jpg";
 import Team from "../assets/team.jpg";
 import { IoIosArrowForward } from "react-icons/io";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { featureData } from "../constant/FeatureData";
 import Features from "../components/Features";
 import { elevateData } from "../constant/ElevateData";
 import Elevate from "../components/Elevate";
 import { testimonialsData } from "../constant/TestimonialsData";
+import { motion } from "framer-motion";
 import Testimonials from "../components/Testimonials";
+import Loader from "../components/Loader";
+import Countdown from "../components/Countdown";
 function Home() {
+  const [active, setActive] = useState(false);
+
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    const handleLoad = () => {
+      setIsLoaded(true);
+    };
+
+    window.addEventListener("load", handleLoad);
+
+    return () => {
+      window.removeEventListener("load", handleLoad);
+    };
+  }, []);
+
+  if (!isLoaded) {
+    return <Loader />;
+  }
   interface titleProps {
     title: string;
     description: string;
@@ -24,12 +46,102 @@ function Home() {
     count: number;
     description: string;
   }
-  const [active, setActive] = useState(false);
+
+  const easing = [0.175, 0.85, 0.42, 0.96];
+
+  // const container = {
+  //   animate: {
+  //     transition: {
+  //       staggerChildren: 0.2, // Délais entre chaque enfant
+  //     },
+  //   },
+  // };
+  const zoomFade = {
+    initial: {
+      opacity: 0,
+      scale: 2,
+    },
+    animate: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        ease: easing,
+        duration: 0.7,
+      },
+    },
+  };
+  const titleTransition = {
+    initial: {
+      opacity: 0,
+      y: 50,
+    },
+    animate: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        ease: easing,
+        duration: 0.7,
+        // delay: 0.5,
+      },
+    },
+  };
+  const headerTransition = {
+    initial: {
+      opacity: 0,
+      y: -50,
+    },
+    animate: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        ease: easing,
+        duration: 0.7,
+        delay: 1,
+      },
+    },
+  };
+  const recognition = {
+    animate: {
+      transition: {
+        delayChildren: 0.2,
+        staggerChildren: 0.2,
+        staggerDirection: 1,
+      },
+    },
+  };
+  const fadeUp = {
+    initial: {
+      opacity: 0,
+      y: 50,
+    },
+    animate: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        ease: easing,
+        duration: 0.7,
+      },
+    },
+  };
+  const fadeDown = {
+    initial: {
+      opacity: 0,
+      y: -50,
+    },
+    animate: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        ease: easing,
+        duration: 0.7,
+      },
+    },
+  };
 
   const Counter: React.FC<counterProps> = ({ count, description }) => {
     return (
       <div className="counter">
-        <h1 className="counter__count">{count}+</h1>
+        <Countdown targetCount={count} />
         <p className="counter__description">{description}</p>
       </div>
     );
@@ -44,10 +156,10 @@ function Home() {
   ];
   const Title: React.FC<titleProps> = ({ title, description, size }) => {
     return (
-      <div className={`title`}>
+      <motion.div variants={titleTransition} className={`title`}>
         <h1 className="title__main">{title}</h1>
         <p className={`title__description ${size}`}>{description}</p>
-      </div>
+      </motion.div>
     );
   };
 
@@ -60,8 +172,8 @@ function Home() {
     { label: <IoSearchSharp />, link: "#" },
   ];
   return (
-    <div className="app">
-      <section className={`header`}>
+    <motion.div className="app" initial="initial" animate="animate">
+      <motion.section className={`header`} variants={headerTransition}>
         <img src={Capitol} alt="" className="header__logo" />
 
         <ul className={`header__wrapper ${active ? "active" : ""}`}>
@@ -85,7 +197,7 @@ function Home() {
         <div className="header__burger" onClick={() => setActive(!active)}>
           <GiHamburgerMenu />
         </div>
-      </section>
+      </motion.section>
       <section className={`navigation navigation__${active ? "active" : ""}`}>
         <h3 className="navigation__menu">Menu</h3>
         {menuItems.map((item, index) => (
@@ -95,12 +207,21 @@ function Home() {
         ))}
       </section>
       <section className="about">
-        <Title
-          title="À Propos"
-          description="Une équipe compétente avec des connaissances"
-          size="large"
+        <motion.span variants={titleTransition}>
+          <Title
+            title="À Propos"
+            description="Une équipe compétente avec des connaissances"
+            size="large"
+          />
+        </motion.span>
+        <motion.img
+          variants={zoomFade}
+          initial="initial"
+          animate="animate"
+          src={Team}
+          alt=""
+          className="about__img"
         />
-        <img src={Team} alt="" className="about__img" />
         <div className="about__wrapper">
           {counterMenuItems.map((item, index) => (
             <Counter
@@ -111,7 +232,13 @@ function Home() {
           ))}
         </div>
       </section>
-      <section className="features">
+      <motion.section
+        variants={recognition}
+        initial="initial"
+        whileInView="animate"
+        viewport={{ once: true, amount: 0.5 }}
+        className="features"
+      >
         <Title
           title="Comment Pouvons-nous vous aider?"
           description="flexibilité de votre style de vie"
@@ -128,12 +255,18 @@ function Home() {
             />
           ))}
         </div>
-      </section>
-      <section className="landing">
-        <div className="landing__wrapper">
+      </motion.section>
+      <motion.section
+        variants={recognition}
+        initial="initial"
+        whileInView="animate"
+        viewport={{ once: true, amount: 0.2 }}
+        className="landing"
+      >
+        <motion.div variants={fadeUp} className="landing__wrapper">
           <img src={House} alt="" />
-        </div>
-        <div className="landing__wrapper">
+        </motion.div>
+        <motion.div variants={fadeDown} className="landing__wrapper">
           <h1 className="landing__title">
             Atterrissage pour le logement d'entreprise
           </h1>
@@ -143,13 +276,19 @@ function Home() {
             solutions d'hébergement flexibles et entièrement équipées, idéales
             pour les séjours de courte et de longue durée.
           </p>
-          <div className="landing__button">
+          <motion.div variants={fadeUp} className="landing__button">
             <Button title="En savoir plus" type="inline" />
             <Button title="Contactez-nous" type="outline" />
-          </div>
-        </div>
-      </section>
-      <section className="elevate">
+          </motion.div>
+        </motion.div>
+      </motion.section>
+      <motion.section
+        variants={recognition}
+        initial="initial"
+        whileInView="animate"
+        viewport={{ once: true, amount: 0.2 }}
+        className="elevate"
+      >
         <Title
           title="Elevé"
           description="Renforcer L'engagement Communautaire"
@@ -157,9 +296,9 @@ function Home() {
         />
         <div className="elevate__zone">
           <div className="elevate__wrapper">
-            <h1 className="elevate__title">
+            <motion.h1 variants={fadeDown} className="elevate__title">
               Une expérience de vie meublée et non un agrégateur
-            </h1>
+            </motion.h1>
             <div className="elevate__mana">
               {elevateData.map((item, index) => (
                 <Elevate
@@ -175,8 +314,8 @@ function Home() {
             <img src={Commnunity} alt="" />
           </div>
         </div>
-      </section>
-      <section className="team">
+      </motion.section>
+      <motion.section variants={recognition} initial="initial" whileInView="animate" viewport={{ once: true, amount: 0.2 }} className="team">
         <Title
           title="Notre Equipe"
           description="Rencontrez notre ecurie"
@@ -192,13 +331,104 @@ function Home() {
             />
           ))}
         </div>
-
+      </motion.section>
+      <section className="newsletter">
+        <div className="newsletter__wrapper">
+          {" "}
+          <h1 className="newsletter__title">Souscrivez à notre newsletter</h1>
+          <p className="newsletter__description">
+            Restez informé des dernières nouvelles, offres exclusives et
+            conseils pratiques en vous abonnant à notre newsletter.
+          </p>
+        </div>
+        <div className="newsletter__wrapper">
+          <input type="text" placeholder="Votre adresse email" />
+          <Button title="Souscrire" type="inline" />
+        </div>
+      </section>
+      <section className="footer">
+        <div className="footer__content">
+          <img src={Capitol} alt="" />
+          <p>© 2024. Tous droits reserves</p>
+        </div>
+        <div className="footer__content">
+          <h4>HOME</h4>
+          <li>
+            <a href="#">Accueil</a>
+          </li>
+          <li>
+            <a href="#">À propos</a>
+          </li>
+          <li>
+            <a href="#">Services</a>
+          </li>
+          <li>
+            <a href="#">Blog</a>
+          </li>
+          <li>
+            <a href="#">Contact</a>
+          </li>
+        </div>
+        <div className="footer__content">
+          <h4>COMPANY</h4>
+          <li>
+            <a href="#">À propos de nous</a>
+          </li>
+          <li>
+            <a href="#">Notre équipe</a>
+          </li>
+          <li>
+            <a href="#">Carrières</a>
+          </li>
+          <li>
+            <a href="#">Partenaires</a>
+          </li>
+          <li>
+            <a href="#">Presse</a>
+          </li>
+        </div>
+        <div className="footer__content">
+          <h4>RESOURCE</h4>
+          <li>
+            <a href="#">Documentation</a>
+          </li>
+          <li>
+            <a href="#">Tutoriels</a>
+          </li>
+          <li>
+            <a href="#">FAQ</a>
+          </li>
+          <li>
+            <a href="#">Blog</a>
+          </li>
+          <li>
+            <a href="#">Support</a>
+          </li>
+        </div>
+        <div className="footer__content">
+          <h4>AUTRES CHOSES</h4>
+          <li>
+            <a href="#">Politique de confidentialité</a>
+          </li>
+          <li>
+            <a href="#">Conditions d'utilisation</a>
+          </li>
+          <li>
+            <a href="#">Cookies</a>
+          </li>
+          <li>
+            <a href="#">Accessibilité</a>
+          </li>
+          <li>
+            <a href="#">Sitemap</a>
+          </li>
+        </div>
       </section>
       <div
         className={`overlay ${active ? "active" : ""}`}
         onClick={() => setActive(false)}
       ></div>
-    </div>
+    </motion.div>
   );
 }
 
